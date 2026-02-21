@@ -2,3 +2,4 @@
 /__pycache__
 /plan.txt
 /backend/__pycache__
+.DS_Store

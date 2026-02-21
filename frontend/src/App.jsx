@@ -222,9 +222,8 @@ function StageList({ stage }) {
                 <div style={{
                   fontSize:10,
                   color: isHov ? "#666" : "#333",
-                  transition:"color 0.2s ease",
                   transform: isHov ? "scale(1.2)" : "scale(1)",
-                  transition:"all 0.25s cubic-bezier(0.34,1.56,0.64,1)",
+                  transition: "color 0.2s ease, transform 0.25s cubic-bezier(0.34,1.56,0.64,1)",
                 }}>✓</div>
               )}
               {active && (
@@ -350,7 +349,7 @@ export default function App() {
         {/* ── LEFT PANEL (38%) ── */}
         <div style={{
           width:'38%', flexShrink:0,
-          borderRight:'1px solid #111',
+          borderRight:'1px solid rgba(255,255,255,0.12)',
           display:'flex', flexDirection:'column',
           overflowY:'auto', padding:'40px 32px',
         }}>

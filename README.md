@@ -6,6 +6,8 @@ No PyTorch. No NumPy. No magic. Just math.
 
 A tiny GPT built from scratch in pure Python, trained on Indian startup names, with every internal computation animated live in a React UI. Not a product. A learning toy. The best kind.
 
+Live demo: https://microgpt-green.vercel.app/
+
 ---
 
 ## The Insight That Started This

@@ -246,6 +246,7 @@ export default function App() {
   const [prefix, setPrefix] = useState('');
   const [temperature, setTemperature] = useState(0.5);
   const [stage, setStage] = useState(0);
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 720 : false);
   const [tokens, setTokens] = useState([]);
   const [embeddings, setEmbeddings] = useState([]);
   const [attentionWeights, setAttentionWeights] = useState([]);
@@ -260,6 +261,12 @@ export default function App() {
 
   useEffect(() => {
     fetch(`${API_BASE}/vocab`).then(r => r.json()).then(setVocabData).catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    function onResize() { setIsMobile(window.innerWidth < 720); }
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
   }, []);
 
   async function run() {
@@ -344,29 +351,29 @@ export default function App() {
   return (
     <>
       <Scanline />
-      <div style={{ display:'flex', flexDirection:'row', minHeight:'100vh', overflow:'hidden' }}>
+      <div style={{ display:'flex', flexDirection: isMobile ? 'column' : 'row', minHeight:'100vh', overflow:'hidden' }}>
 
         {/* ── LEFT PANEL (38%) ── */}
         <div style={{
-          width:'38%', flexShrink:0,
-          borderRight:'1px solid rgba(255,255,255,0.12)',
+          width: isMobile ? '100%' : '38%', flexShrink:0,
+          borderRight: isMobile ? 'none' : '1px solid rgba(255,255,255,0.12)',
           display:'flex', flexDirection:'column',
-          overflowY:'auto', padding:'40px 32px',
+          overflowY:'auto', padding: isMobile ? '20px 18px' : '40px 32px',
         }}>
           {/* Header */}
           <div style={{ marginBottom:32, opacity:0, animation:'fadeUp 0.6s ease both' }}>
             <div style={{ fontSize:10, letterSpacing:'0.35em', color:'#bbb', marginBottom:14 }}>
               MICROGPT / TRANSFORMER / VISUALIZER
             </div>
-            <h1 style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:72, letterSpacing:'0.04em', lineHeight:0.9, color:'#fff' }}>
+            <h1 style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize: isMobile ? 42 : 72, letterSpacing:'0.04em', lineHeight:0.95, color:'#fff' }}>
               micro<br /><span style={{ color:'#e6e6e6' }}>GPT</span>
             </h1>
-            <div style={{ fontSize:11, color:'#ddd', marginTop:14, letterSpacing:'0.1em', lineHeight:2 }}>
+            <div style={{ fontSize: isMobile ? 12 : 11, color:'#ddd', marginTop: isMobile ? 10 : 14, letterSpacing:'0.1em', lineHeight: isMobile ? 1.6 : 2 }}>
               150 lines · no pytorch · just math<br />
               <span style={{ color:'#ccc' }}>watch the transformer think in real time</span>
             </div>
 
-            <div style={{ marginTop:12, display:'flex', gap:10, alignItems:'center' }}>
+            <div style={{ marginTop:12, display:'flex', gap:10, alignItems:'center', flexDirection: isMobile ? 'column' : 'row', alignItems: isMobile ? 'flex-start' : 'center' }}>
               <div style={{ fontSize:11, color:'#fff', background:'#111', border:'1px solid #222', padding:'6px 10px', borderRadius:6, boxShadow:'0 4px 14px rgba(0,0,0,0.6)' }}>
                 @andrej_Karpathy
               </div>
@@ -375,9 +382,9 @@ export default function App() {
           </div>
 
           {/* Input */}
-          <div style={{ opacity:0, animation:'fadeUp 0.5s ease 200ms both' }}>
+            <div style={{ opacity:0, animation:'fadeUp 0.5s ease 200ms both' }}>
             <div style={{ fontSize:11, color:'#bbb', letterSpacing:'0.2em', marginBottom:12 }}>ENTER A PREFIX</div>
-            <div style={{ display:'flex', gap:0, marginBottom:28, borderBottom:'1px solid #333' }}>
+            <div style={{ display:'flex', gap:0, marginBottom:28, borderBottom:'1px solid #333', flexDirection: isMobile ? 'column' : 'row' }}>
               <input
                 value={prefix}
                 onChange={e => setPrefix(e.target.value)}
@@ -387,7 +394,7 @@ export default function App() {
                 style={{
                   flex:1, background:'transparent', border:'none',
                   color:'#fff', fontFamily:"'Share Tech Mono', monospace",
-                  fontSize:28, padding:'10px 0', outline:'none', letterSpacing:'0.08em',
+                  fontSize: isMobile ? 20 : 28, padding: isMobile ? '8px 0' : '10px 0', outline:'none', letterSpacing:'0.08em',
                 }}
               />
               <button onClick={run} disabled={isRunning} style={{
@@ -395,8 +402,8 @@ export default function App() {
                 color: isRunning ? '#555' : '#000',
                 border:'none', fontFamily:"'Share Tech Mono', monospace",
                 fontSize:11, letterSpacing:'0.25em',
-                padding:'0 24px', cursor: isRunning ? 'default' : 'pointer',
-                transition:'all 0.2s ease', flexShrink:0,
+                padding: isMobile ? '10px 14px' : '0 24px', cursor: isRunning ? 'default' : 'pointer',
+                transition:'all 0.2s ease', flexShrink:0, marginTop: isMobile ? 12 : 0, width: isMobile ? '100%' : 'auto',
               }}
                 onMouseEnter={e => { if (!isRunning) e.target.style.background='#ddd'; }}
                 onMouseLeave={e => { if (!isRunning) e.target.style.background='#fff'; }}

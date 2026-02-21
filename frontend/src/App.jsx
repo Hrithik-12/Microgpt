@@ -356,21 +356,28 @@ export default function App() {
         }}>
           {/* Header */}
           <div style={{ marginBottom:32, opacity:0, animation:'fadeUp 0.6s ease both' }}>
-            <div style={{ fontSize:10, letterSpacing:'0.35em', color:'#666', marginBottom:14 }}>
+            <div style={{ fontSize:10, letterSpacing:'0.35em', color:'#bbb', marginBottom:14 }}>
               MICROGPT / TRANSFORMER / VISUALIZER
             </div>
             <h1 style={{ fontFamily:"'Bebas Neue', sans-serif", fontSize:72, letterSpacing:'0.04em', lineHeight:0.9, color:'#fff' }}>
-              micro<br /><span style={{ color:'#444' }}>GPT</span>
+              micro<br /><span style={{ color:'#e6e6e6' }}>GPT</span>
             </h1>
-            <div style={{ fontSize:11, color:'#777', marginTop:14, letterSpacing:'0.1em', lineHeight:2 }}>
+            <div style={{ fontSize:11, color:'#ddd', marginTop:14, letterSpacing:'0.1em', lineHeight:2 }}>
               150 lines · no pytorch · just math<br />
-              <span style={{ color:'#666' }}>watch the transformer think in real time</span>
+              <span style={{ color:'#ccc' }}>watch the transformer think in real time</span>
+            </div>
+
+            <div style={{ marginTop:12, display:'flex', gap:10, alignItems:'center' }}>
+              <div style={{ fontSize:11, color:'#fff', background:'#111', border:'1px solid #222', padding:'6px 10px', borderRadius:6, boxShadow:'0 4px 14px rgba(0,0,0,0.6)' }}>
+                @andrej_Karpathy
+              </div>
+              <div style={{ fontSize:11, color:'#bbb' }}>for code & learning</div>
             </div>
           </div>
 
           {/* Input */}
           <div style={{ opacity:0, animation:'fadeUp 0.5s ease 200ms both' }}>
-            <div style={{ fontSize:11, color:'#aaa', letterSpacing:'0.2em', marginBottom:12 }}>ENTER A PREFIX</div>
+            <div style={{ fontSize:11, color:'#bbb', letterSpacing:'0.2em', marginBottom:12 }}>ENTER A PREFIX</div>
             <div style={{ display:'flex', gap:0, marginBottom:28, borderBottom:'1px solid #333' }}>
               <input
                 value={prefix}
@@ -399,33 +406,33 @@ export default function App() {
 
             {/* Temperature */}
             <div style={{ marginBottom:28 }}>
-              <div style={{ display:'flex', justifyContent:'space-between', fontSize:11, color:'#888', letterSpacing:'0.15em', marginBottom:12 }}>
+              <div style={{ display:'flex', justifyContent:'space-between', fontSize:11, color:'#bbb', letterSpacing:'0.15em', marginBottom:12 }}>
                 <span>TEMPERATURE</span>
-                <span style={{ color:'#ccc' }}>{temperature.toFixed(1)}</span>
+                <span style={{ color:'#ddd' }}>{temperature.toFixed(1)}</span>
               </div>
               <input type="range" min="0.1" max="1.5" step="0.1"
                 value={temperature}
                 onChange={e => setTemperature(parseFloat(e.target.value))}
                 style={{ width:'100%', accentColor:'#fff', cursor:'pointer' }}
               />
-              <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, color:'#777', marginTop:8 }}>
+              <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, color:'#bbb', marginTop:8 }}>
                 <span>conservative</span><span>creative chaos</span>
               </div>
             </div>
 
             {/* Quick picks */}
             <div>
-              <div style={{ fontSize:10, color:'#777', letterSpacing:'0.2em', marginBottom:12 }}>QUICK START</div>
+              <div style={{ fontSize:10, color:'#bbb', letterSpacing:'0.2em', marginBottom:12 }}>QUICK START</div>
               <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
                 {['snap','zep','cred','swift','nova','orbit',''].map(p => (
                   <button key={p||'rnd'} onClick={() => setPrefix(p)} style={{
                     background:'transparent', border:'1px solid #333',
-                    color:'#888', fontFamily:"'Share Tech Mono', monospace",
+                    color:'#bbb', fontFamily:"'Share Tech Mono', monospace",
                     fontSize:11, padding:'7px 14px', cursor:'pointer',
                     transition:'all 0.25s ease', letterSpacing:'0.1em',
                   }}
-                    onMouseEnter={e => { e.target.style.borderColor='#888'; e.target.style.color='#fff'; }}
-                    onMouseLeave={e => { e.target.style.borderColor='#333'; e.target.style.color='#888'; }}
+                    onMouseEnter={e => { e.target.style.borderColor='#bbb'; e.target.style.color='#fff'; }}
+                    onMouseLeave={e => { e.target.style.borderColor='#333'; e.target.style.color='#bbb'; }}
                   >{p || 'random'}</button>
                 ))}
               </div>
